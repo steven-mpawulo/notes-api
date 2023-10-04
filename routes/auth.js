@@ -38,6 +38,6 @@ passport.serializeUser(function(user, cb) {
 const authRoute = express.Router();
 
 authRoute.post('/v1/auth/signup', signup);
-authRoute.post('/v1/auth/login', login);
+authRoute.post('/v1/auth/login', passport.authenticate('local'), login);
 
 module.exports = authRoute;
