@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../../models/User');
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
     const {email, password, firstName, lastName} = req.body;
 
     if (email && password && firstName && lastName) {
@@ -18,7 +18,13 @@ const signup = async (req, res) => {
                 res.status(400).json({"message": "failed to save user"});
                 return
             }
-            res.status(201).json({"message": "user created successfully", "user": user});
+            req.login({"username": user.email, "id": user._id},(function (err) {
+                if (err) {
+                    next(err);
+                }
+                res.status(201).json({"message": "user created successfully and logged in", "user": req.user});
+            }));
+            
         }).catch((e) => {
             console.log(e);
             res.status(400).json({"message": "something went wrong", "error": e.message});

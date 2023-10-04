@@ -3,8 +3,8 @@ const signup = require('../controllers/auth/signup');
 const passport = require('passport');
 const login = require('../controllers/auth/login');
 const logout = require('../controllers/auth/logout');
-
 const passportAuthentication = require('../passport/passport');
+
 passportAuthentication();
 
 const authRoute = express.Router();
