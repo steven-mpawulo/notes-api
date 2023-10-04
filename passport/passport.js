@@ -1,4 +1,8 @@
-const passportAuthentication = (passport, LocalStrategy, bcrypt, User) => {
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const bcrypt = require('bcrypt');
+const User = require('../models/User');
+const passportAuthentication = () => {
     passport.use(new LocalStrategy({
         usernameField: 'email'
     },
