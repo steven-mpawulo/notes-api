@@ -4,6 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const login = require('../controllers/auth/login');
 
 passport.use(new LocalStrategy({
     usernameField: 'email'
@@ -37,5 +38,6 @@ passport.serializeUser(function(user, cb) {
 const authRoute = express.Router();
 
 authRoute.post('/v1/auth/signup', signup);
+authRoute.post('/v1/auth/login', login);
 
 module.exports = authRoute;
