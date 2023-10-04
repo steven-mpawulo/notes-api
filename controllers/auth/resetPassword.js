@@ -9,7 +9,7 @@ const resetPassword = async (req, res) => {
             console.log(user);
             if (user) {
                 // send email from here
-                const link = `http://localhost:6000/api/v1/auth/password/reset?email=${user.email}`;
+                const link = `http://localhost:6000/api/v1/auth/password/update?email=${user.email}`;
             res.status(200).json({"message": "reset password", "link": link});
             } else {
                 res.status(400).json({"message": "user not found"});
