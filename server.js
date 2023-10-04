@@ -3,6 +3,7 @@ const session = require('express-session');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
+const passport = require('passport');
 
 const app = express();
 
@@ -12,7 +13,9 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true }
-}))
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/api', authRoute);
 
 const port = process.env.PORT || 6001;

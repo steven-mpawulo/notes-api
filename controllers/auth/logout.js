@@ -1,5 +1,5 @@
 const logout = (req, res, next) => {
-    req.logout(function(err) {
+    req.logOut(function(err) {
         if (err) {
             next(err);
         }
