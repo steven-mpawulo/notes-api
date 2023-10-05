@@ -1,4 +1,6 @@
 const Note = require("../../models/Note");
+const User = require("../../models/User");
+
 
 const getNote = async (req, res) => {
     const userId = req.params.userId;
