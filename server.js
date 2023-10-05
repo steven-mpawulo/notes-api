@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const authRoute = require('./routes/auth');
 const passport = require('passport');
 const noteRoute = require('./routes/note');
+const userRoute = require('./routes/user');
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/api', authRoute, noteRoute);
+app.use('/api', authRoute, noteRoute, userRoute);
 
 const port = process.env.PORT || 6001;
 
