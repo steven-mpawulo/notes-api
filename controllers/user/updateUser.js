@@ -10,6 +10,7 @@ const updateUser = async (req, res) => {
         if (email) {
             await User.findByIdAndUpdate({ '_id': userId }, { $set: { "email": email } }, { new: true }).then((user) => {
                 console.log(user);
+                res.status(201).json({"message": "user updated", user});
             }).catch((e) => {
                 console.log(e);
                 res.status(400).json({ "message": "something went wrong", "error": e.message });
