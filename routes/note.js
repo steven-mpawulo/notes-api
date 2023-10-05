@@ -10,7 +10,7 @@ const noteRoute = express.Router();
 noteRoute.post('/v1/notes/:userId', addNote);
 noteRoute.get('/v1/notes/:userId', getNotes);
 noteRoute.get('/v1/notes/:userId/:noteId', getNote);
-authRoute.put('/v1/notes/:userId/:noteId', updateNote);
+noteRoute.put('/v1/notes/:userId/:noteId', updateNote);
 noteRoute.delete('/v1/notes/:userId/:noteId', deleteNote);
 
 module.exports = noteRoute;
