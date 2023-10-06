@@ -17,7 +17,13 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, "please provide password"]
-    }
+    },
+    friends: [
+    {
+        type: mongoose.Types.ObjectId,
+        ref: 'noteUser'
+}
+    ],
 });
 
 module.exports = mongoose.model('notesUser', userSchema);
