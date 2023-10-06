@@ -7,13 +7,14 @@ const removeFriend = (req, res) => {
 
 	if (friendId !== undefined && userId !== undefined) {
 		await User.findByIdAndUpdate({'_id': userId}, {$pull: {'friends': friendId}}, {new: true}).then((updatedUser) => {
+			console.log(updatedUser);
 			if (updatedUser) {
 				await User.findByIdAndUpdate({'_id': friendId}, {$pull: {'friends': userId}}, {new: true}).then((updatedFriend) => {
 					console.log(updatedFriend);
 					if (updatedFriend) {
-						res.status(200).json({"message": "friend removed"});
+						res.status(200).json({"message": "friend successfully removed", updatedUser, updatedFriend});
 					} else {
-					res.status(400).json({"message": "failed to friend removed"});	
+					res.status(400).json({"message": "failed to remove friend"});	
 					}
 					
 				}).catch((e) => {
@@ -31,3 +32,5 @@ const removeFriend = (req, res) => {
 		res.status(400).json({"message": "please provide valid friend and user Id"});
 	}
 }
+
+module.exports = removeFriend;
