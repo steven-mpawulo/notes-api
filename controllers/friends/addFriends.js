@@ -13,7 +13,12 @@ const addFriend = (req, res) => {
 		if (user) {
 			await User.findByIdAndUpdate({'_id': friendId}, {$addToSet: {"friends": user._id}}, {new: true}).then((updatedFriend) => {
 				console.log(updatedFriend);
-				res.status(200).json({"message": "friend added", user, updatedFriend});
+				if (updatedFriend) {
+					res.status(200).json({"message": "friend added", user, updatedFriend});
+				} else {
+					res.status(400).json({"message": "failed to update friend"});
+				}
+				
 			}).catch((e) => {
 				console.log(e);
 				res.status(400).json({"message": "something went wrong", "error": e.message});
