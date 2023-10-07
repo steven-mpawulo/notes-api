@@ -1,15 +1,14 @@
-const mongoose = require('mongoose');
 const User = require('../models/User');
 
-const addFriend = (req, res) => {
+const addFriend = async (req, res) => {
 	const userId = req.params.userId;
 	console.log(userId);
 	const friendId = req.params.friendId;
 	console.log(friendId);
 
-	await User.findById({'_id': friendId}).then((friend) => {
+	await User.findById({'_id': friendId}).then(async (friend) => {
 		if (friend) {
-			await User.findByIdAndUpdate({'_id': userId}, {$addToSet: {"friends": friend._id}}, {new: true}).then((user) => {
+			await User.findByIdAndUpdate({'_id': userId}, {$addToSet: {"friends": friend._id}}, {new: true}).then(async (user) => {
 		if (user) {
 			await User.findByIdAndUpdate({'_id': friendId}, {$addToSet: {"friends": user._id}}, {new: true}).then((updatedFriend) => {
 				console.log(updatedFriend);
